@@ -1,0 +1,29 @@
+{
+  "name": "blockport-spacebox",
+  "version": "0.1.0",
+  "description": "Blockport for Spacebox: convert Minecraft structures to Spacebox .sbs files (unofficial community tool)",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "convert": "tsx scripts/convert.ts"
+  },
+  "dependencies": {
+    "fast-png": "^8.0.0",
+    "fflate": "^0.8.3",
+    "nucleation": "^0.12.0",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/three": "^0.187.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.7",
+    "vitest": "^5.1.0"
+  }
+}
