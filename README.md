@@ -8,7 +8,8 @@ Unofficial community tool, not affiliated with Spacebox or its developer.
 click-to-remap editor and structure generator work.
 
 **Open the app: https://olekkut.github.io/blockport-spacebox/** (Chrome, Edge or Firefox; nothing is uploaded).
-To run it locally, use `npm install` and `npm run dev`.
+Click **Try the demo ship** to see an existing `.sbs` (a Millennium Falcon, `public/demo/millennium_falcon_mk1.sbs`)
+load and render, or open `?demo` directly. To run it locally, use `npm install` and `npm run dev`.
 
 ## Browser app
 

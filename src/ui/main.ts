@@ -302,7 +302,7 @@ function renderRows() {
   $('rows').innerHTML = buildRows().map((r) => {
     const on = S.selection?.key === r.key;
     return `<div class="row${on ? ' sel' : ''}" data-key="${esc(r.key)}"><span class="sw" style="background:${mcSwatch(r.ids[0]!)}"></span>` +
-      `<span class="nm" title="${esc(r.ids.join(', '))}">${esc(r.key.replace(/^minecraft:/, ''))}</span><span class="ct">${num(r.count)}</span>${targetCell(r)}</div>`;
+      `<span class="nm" title="${esc(r.ids.join(', '))}">${esc(r.key.replace(/^[a-z0-9_]+:/, ''))}</span><span class="ct">${num(r.count)}</span>${targetCell(r)}</div>`;
   }).join('');
 }
 
@@ -495,7 +495,7 @@ $('states').addEventListener('click', (e) => {
 function selectionLabel(): string {
   const sel = S.selection!;
   const filter = Object.entries(sel.props).map(([k, v]) => `${k}=${v}`).join(', ');
-  return sel.key.replace(/^minecraft:/, '') + (filter ? ` [${filter}]` : '');
+  return sel.key.replace(/^[a-z0-9_]+:/, '') + (filter ? ` [${filter}]` : '');
 }
 
 const ROLLS = [0, 90, 180, 270];
@@ -833,6 +833,18 @@ window.addEventListener('keydown', (e) => {
 });
 $('btn-undo').addEventListener('click', undo);
 $('btn-redo').addEventListener('click', redo);
+
+// ---------- demo ship ----------
+async function loadDemo() {
+  try {
+    status('Loading the demo ship');
+    const res = await fetch(`${import.meta.env.BASE_URL}demo/millennium_falcon_mk1.sbs`);
+    if (!res.ok) throw new Error(`Demo file not found (${res.status})`);
+    await setModel(new Uint8Array(await res.arrayBuffer()), 'millennium_falcon_mk1.sbs');
+  } catch (e) { fail(e instanceof Error ? e.message : String(e)); }
+}
+$('btn-demo').addEventListener('click', () => void loadDemo());
+if (new URLSearchParams(location.search).has('demo')) void loadDemo();
 
 // ---------- generator ----------
 const genEl = {
